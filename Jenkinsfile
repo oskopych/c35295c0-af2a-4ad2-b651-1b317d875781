@@ -28,7 +28,7 @@ pipeline {
                 sh """
                     docker run \
                         -v $PWD:/reports \
-                        --rm -ti myapp:0.0.1 \
+                        --rm myapp:0.0.1 \
                         pytest --verbose --junit-xml \
                         /reports/results.xml
                 """
