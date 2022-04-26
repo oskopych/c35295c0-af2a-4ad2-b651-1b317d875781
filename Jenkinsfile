@@ -25,7 +25,7 @@ pipeline {
                         --target test \
                         .
                 """
-                sh "mkdir $PWD/reports"
+                // sh "mkdir $PWD/reports"
                 sh """
                     docker run \
                         -v $PWD:/reports \
