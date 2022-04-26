@@ -32,6 +32,7 @@ pipeline {
                         pytest --verbose --junit-xml \
                         /reports/results.xml
                 """
+                sh "echo /reports/results.xml"
 
             }
             post {
@@ -40,7 +41,8 @@ pipeline {
                     //exposes the results through the Jenkins interface.
                     //The post section’s always condition that contains this junit step ensures that the step is
                     //always executed at the completion of the Test stage, regardless of the stage’s outcome.
-                    junit './results.xml'
+                    junit 'echo $PWD'
+                    junit '/results.xml'
                 }
             }
         }       
