@@ -28,7 +28,7 @@ pipeline {
                 // sh "mkdir $PWD/reports"
                 sh """
                     docker run \
-                        -v $PWD:/reports \
+                        -v $PWD/reports:/reports \
                         --rm myapp:0.0.1 \
                         pytest --verbose --junit-xml \
                         /reports/results.xml
@@ -44,7 +44,7 @@ pipeline {
                     //The post section’s always condition that contains this junit step ensures that the step is
                     //always executed at the completion of the Test stage, regardless of the stage’s outcome.
                     junit 'echo $PWD'
-                    junit 'echo $PWD/results.xml'
+                    junit '$PWD/reports/results.xml'
                 }
             }
         }       
