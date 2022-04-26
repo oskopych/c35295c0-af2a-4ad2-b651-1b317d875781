@@ -34,6 +34,7 @@ pipeline {
                         /reports/results.xml
                 """
                 sh "ls -al $PWD"
+                sh "ls -al $PWD/reports"
 
             }
             post {
