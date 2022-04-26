@@ -31,10 +31,9 @@ pipeline {
                         -v $PWD:/reports \
                         --rm myapp:0.0.1 \
                         pytest --verbose --junit-xml \
-                        /reports/results.xml \
-                        && cat /reports/results.xml
+                        /reports/results.xml
                 """
-                sh "cat $PWD/results.xml"
+                sh "ls -al $PWD"
 
             }
             post {
