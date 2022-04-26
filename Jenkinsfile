@@ -17,17 +17,20 @@ pipeline {
                 //The --junit-xml test-reports/results.xml option makes py.test generate a JUnit XML report,
                 //which is saved to test-reports/results.xml
                 // sh 'pytest --verbose --junit-xml test-reports/results.xml'
+                sh "echo $PWD"
                 sh """
                     docker build \
                         --file ./docker/Dockerfile \
                         --tag myapp:0.0.1 \
-                        --target test
+                        --target test \
+                        .
                 """
                 sh """
                     docker run \
                         -v $PWD:/reports \
                         --rm -ti myapp:0.0.1 \
-                        pytest --verbose --junit-xml reports/results.xml
+                        pytest --verbose --junit-xml \
+                        /reports/results.xml
                 """
 
             }
