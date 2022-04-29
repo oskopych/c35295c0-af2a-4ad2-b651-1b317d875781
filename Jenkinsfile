@@ -45,7 +45,7 @@ pipeline {
                     sh "ls -al $WORKSPACE"
                     sh "cat $WORKSPACE/results.xml"
 
-                    junit '$WORKSPACE/results.xml'
+                    junit 'results.xml'
                 }
             }
         }       
