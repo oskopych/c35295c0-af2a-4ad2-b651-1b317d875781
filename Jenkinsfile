@@ -8,6 +8,7 @@ pipeline {
                     filename 'docker/Dockerfile'
                     dir '.'
                     additionalBuildArgs  '--target test --tag myapp:0.0.1 --build-arg version=1.0.2'
+                    args '--volume $WORKSPACE:/output'
 //                     args '--target test --tag myapp:0.0.1'
                 }
             }
@@ -26,14 +27,15 @@ pipeline {
 //                         .
 //                 """
                 // sh "mkdir $PWD/reports"
-                sh """
-                    docker run \
-                        -v $WORKSPACE:/output \
-                        --rm myapp:0.0.1 \
-                        pytest --verbose --junit-xml \
-                        /output/results.xml
-                """
-                sh "ls -al $WORKSPACE"
+//                 sh """
+//                     docker run \
+//                         -v $WORKSPACE:/output \
+//                         --rm myapp:0.0.1 \
+//                         pytest --verbose --junit-xml \
+//                         /output/results.xml
+//                 """
+                sh "pytest --verbose --junit-xml /output/results.xml"
+                // sh "ls -al $WORKSPACE"
 
             }
             post {
