@@ -7,8 +7,8 @@ pipeline {
                 dockerfile {
                     filename 'docker/Dockerfile'
                     dir '.'
-                    // additionalBuildArgs  '--build-arg version=1.0.2'
-                    args '--target test --tag myapp:0.0.1'
+                    additionalBuildArgs  '--target test --tag myapp:0.0.1 --build-arg version=1.0.2'
+//                     args '--target test --tag myapp:0.0.1'
                 }
             }
             steps {
