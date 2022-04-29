@@ -28,13 +28,12 @@ pipeline {
                 // sh "mkdir $PWD/reports"
                 sh """
                     docker run \
-                        -v $PWD/reports:/reports \
+                        -v $WORKSPACE:/output \
                         --rm myapp:0.0.1 \
                         pytest --verbose --junit-xml \
-                        /reports/results.xml
+                        /output/results.xml
                 """
-                sh "ls -al $PWD"
-                sh "ls -al $PWD/reports"
+                sh "ls -al $WORKSPACE"
 
             }
             post {
@@ -43,8 +42,7 @@ pipeline {
                     //exposes the results through the Jenkins interface.
                     //The post section’s always condition that contains this junit step ensures that the step is
                     //always executed at the completion of the Test stage, regardless of the stage’s outcome.
-                    junit 'echo $PWD'
-                    junit '$PWD/reports/results.xml'
+                    junit '$WORKSPACE/results.xml'
                 }
             }
         }       
