@@ -2,15 +2,15 @@ pipeline {
     agent any
     stages {     
         stage('Running Tests') {
-            // agent {
-            //     // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-            //     dockerfile {
-            //         filename 'docker/Dockerfile'
-            //         dir '.'
-            //         // additionalBuildArgs  '--build-arg version=1.0.2'
-            //         args '--target test --tag myapp:0.0.1'
-            //     }
-            // }
+            agent {
+                // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+                dockerfile {
+                    filename 'docker/Dockerfile'
+                    dir '.'
+                    // additionalBuildArgs  '--build-arg version=1.0.2'
+                    args '--target test --tag myapp:0.0.1'
+                }
+            }
             steps {
                 //This sh step executes pytest’s py.test command on sources/test_calc.py, which runs a set of
                 //unit tests (defined in test_calc.py) on the "calc" library’s add2 function.
@@ -18,13 +18,13 @@ pipeline {
                 //which is saved to test-reports/results.xml
                 // sh 'pytest --verbose --junit-xml test-reports/results.xml'
                 sh "echo $PWD"
-                sh """
-                    docker build \
-                        --file ./docker/Dockerfile \
-                        --tag myapp:0.0.1 \
-                        --target test\
-                        .
-                """
+//                 sh """
+//                     docker build \
+//                         --file ./docker/Dockerfile \
+//                         --tag myapp:0.0.1 \
+//                         --target test\
+//                         .
+//                 """
                 // sh "mkdir $PWD/reports"
                 sh """
                     docker run \
