@@ -22,7 +22,7 @@ pipeline {
                     docker build \
                         --file ./docker/Dockerfile \
                         --tag myapp:0.0.1 \
-                        --target test \
+                        --target test\
                         .
                 """
                 // sh "mkdir $PWD/reports"
