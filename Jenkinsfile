@@ -43,6 +43,8 @@ pipeline {
                     //The post section’s always condition that contains this junit step ensures that the step is
                     //always executed at the completion of the Test stage, regardless of the stage’s outcome.
                     sh "ls -al $WORKSPACE"
+                    sh "cat $WORKSPACE/results.xml"
+
                     junit '$WORKSPACE/results.xml'
                 }
             }
