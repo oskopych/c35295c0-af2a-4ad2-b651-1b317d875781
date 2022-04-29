@@ -5,6 +5,7 @@ pipeline {
             agent {
                 // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
                 dockerfile {
+                    label "myapp-label"
                     filename 'docker/Dockerfile'
                     dir '.'
                     additionalBuildArgs  '--target test --tag myapp:0.0.1 --build-arg version=1.0.2'
